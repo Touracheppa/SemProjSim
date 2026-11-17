@@ -174,6 +174,32 @@ Visualization Manager:
       Reliability Policy: Reliable
       History Policy: Keep Last
       Depth: 1
+  - Class: rviz_default_plugins/Image
+    Name: RGB Camera
+    Enabled: true
+    Topic:
+      Value: /camera/color/image_raw
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Depth: 5
+    Transport Hint: raw
+    Normalize Range: true
+    Min Value: 0.25
+    Max Value: 9.0
+  - Class: rviz_default_plugins/Image
+    Name: Depth Camera
+    Enabled: true
+    Topic:
+      Value: /camera/depth/image_raw
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Depth: 5
+    Transport Hint: raw
+    Normalize Range: true
+    Min Value: 0.25
+    Max Value: 9.0
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48

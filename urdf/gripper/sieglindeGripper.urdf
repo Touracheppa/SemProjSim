@@ -247,4 +247,10 @@
         </actuator>
     </transmission>
 <!-- [END] ===  Arm transmission section. Needed for ros_control. === -->
+  <!-- Cartesian control point at the center of the three finger pivots. -->
+  <link name="tool0"/>
+  <joint name="tool0_joint" type="fixed">
+    <parent link="arm_link_5"/><child link="tool0"/>
+    <origin xyz="0 -0.0001 0.137" rpy="0 0 0"/>
+  </joint>
 </robot>

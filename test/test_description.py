@@ -19,7 +19,7 @@ def test_description():
     for link in root.findall('link'):
         inertia = link.find('inertial/inertia')
         if inertia is None:
-            assert link.get('name') == 'base_link'
+            assert link.get('name') in {'base_link', 'camera_link', 'camera_optical_frame', 'tool0'}
             continue
         a = {key: float(value) for key, value in inertia.attrib.items()}
         values = np.linalg.eigvalsh([[a['ixx'], a['ixy'], a['ixz']], [a['ixy'], a['iyy'], a['iyz']], [a['ixz'], a['iyz'], a['izz']]])

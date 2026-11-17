@@ -193,4 +193,20 @@
       <imu/>
     </sensor>
   </gazebo>
+  <gazebo reference="camera_link">
+    <sensor name="l515_rgbd" type="rgbd_camera">
+      <topic>/camera</topic>
+      <gz_frame_id>camera_optical_frame</gz_frame_id>
+      <always_on>true</always_on>
+      <update_rate>15</update_rate>
+      <camera>
+        <optical_frame_id>camera_optical_frame</optical_frame_id>
+        <camera_info_topic>/camera/camera_info</camera_info_topic>
+        <horizontal_fov>1.2217304764</horizontal_fov>
+        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
+        <clip><near>0.1</near><far>9.0</far></clip>
+        <depth_camera><clip><near>0.25</near><far>9.0</far></clip></depth_camera>
+      </camera>
+    </sensor>
+  </gazebo>
 </robot>
