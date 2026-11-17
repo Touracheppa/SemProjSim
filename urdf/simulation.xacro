@@ -1,0 +1,196 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <ros2_control name="SieglindeSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    <joint name="arm_joint_1">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="arm_joint_2">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="arm_joint_3">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="arm_joint_4">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="arm_joint_5">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Grip">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="flipper_joint">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="g2">
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="g3">
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="flipper_joint_mimic">
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find sieglinde_sim)/config/controllers.yaml</parameters>
+    </plugin>
+    <plugin filename="gz-sim-tracked-vehicle-system" name="gz::sim::systems::TrackedVehicle">
+      <left_track>
+        <link>main_left_track</link>
+      </left_track>
+      <right_track>
+        <link>main_right_track</link>
+      </right_track>
+      <left_track>
+        <link>front_left_track</link>
+      </left_track>
+      <right_track>
+        <link>front_right_track</link>
+      </right_track>
+      <left_track>
+        <link>rear_left_track</link>
+      </left_track>
+      <right_track>
+        <link>rear_right_track</link>
+      </right_track>
+      <tracks_separation>0.53</tracks_separation>
+      <tracks_height>0.26</tracks_height>
+      <steering_efficiency>0.5</steering_efficiency>
+      <topic>/model/sieglinde/cmd_vel</topic>
+      <odom_topic>/model/sieglinde/odometry</odom_topic>
+      <tf_topic>/model/sieglinde/tf</tf_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+      <odom_publish_frequency>50</odom_publish_frequency>
+    </plugin>
+    <plugin filename="gz-sim-track-controller-system" name="gz::sim::systems::TrackController">
+      <link>main_left_track</link>
+      <min_velocity>-0.6</min_velocity>
+      <max_velocity>0.6</max_velocity>
+      <min_acceleration>-1</min_acceleration>
+      <max_acceleration>1</max_acceleration>
+    </plugin>
+    <plugin filename="gz-sim-track-controller-system" name="gz::sim::systems::TrackController">
+      <link>main_right_track</link>
+      <min_velocity>-0.6</min_velocity>
+      <max_velocity>0.6</max_velocity>
+      <min_acceleration>-1</min_acceleration>
+      <max_acceleration>1</max_acceleration>
+    </plugin>
+    <plugin filename="gz-sim-track-controller-system" name="gz::sim::systems::TrackController">
+      <link>front_left_track</link>
+      <min_velocity>-0.6</min_velocity>
+      <max_velocity>0.6</max_velocity>
+      <min_acceleration>-1</min_acceleration>
+      <max_acceleration>1</max_acceleration>
+    </plugin>
+    <plugin filename="gz-sim-track-controller-system" name="gz::sim::systems::TrackController">
+      <link>front_right_track</link>
+      <min_velocity>-0.6</min_velocity>
+      <max_velocity>0.6</max_velocity>
+      <min_acceleration>-1</min_acceleration>
+      <max_acceleration>1</max_acceleration>
+    </plugin>
+    <plugin filename="gz-sim-track-controller-system" name="gz::sim::systems::TrackController">
+      <link>rear_left_track</link>
+      <min_velocity>-0.6</min_velocity>
+      <max_velocity>0.6</max_velocity>
+      <min_acceleration>-1</min_acceleration>
+      <max_acceleration>1</max_acceleration>
+    </plugin>
+    <plugin filename="gz-sim-track-controller-system" name="gz::sim::systems::TrackController">
+      <link>rear_right_track</link>
+      <min_velocity>-0.6</min_velocity>
+      <max_velocity>0.6</max_velocity>
+      <min_acceleration>-1</min_acceleration>
+      <max_acceleration>1</max_acceleration>
+    </plugin>
+    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+      <odom_topic>/model/sieglinde/ground_truth</odom_topic>
+      <odom_frame>world</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <dimensions>3</dimensions>
+      <odom_publish_frequency>20</odom_publish_frequency>
+    </plugin>
+  </gazebo>
+  <gazebo reference="velodyne">
+    <sensor name="vlp16" type="gpu_lidar">
+      <topic>/lidar</topic>
+      <gz_frame_id>velodyne</gz_frame_id>
+      <update_rate>10</update_rate>
+      <always_on>true</always_on>
+      <lidar>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159265</min_angle>
+            <max_angle>3.14159265</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>16</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.261799</min_angle>
+            <max_angle>0.261799</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.3</min>
+          <max>50</max>
+          <resolution>0.01</resolution>
+        </range>
+      </lidar>
+    </sensor>
+  </gazebo>
+  <gazebo reference="imu">
+    <sensor name="imu_sensor" type="imu">
+      <topic>/imu</topic>
+      <gz_frame_id>imu</gz_frame_id>
+      <update_rate>100</update_rate>
+      <always_on>true</always_on>
+      <imu/>
+    </sensor>
+  </gazebo>
+</robot>

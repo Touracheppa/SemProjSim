@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="inertial_cuboid_with_pose" params="mass x_length y_length z_length *origin">
+    <inertial><xacro:insert_block name="origin"/><mass value="${mass}"/>
+      <inertia ixx="${mass*(y_length*y_length+z_length*z_length)/12}" iyy="${mass*(x_length*x_length+z_length*z_length)/12}" izz="${mass*(x_length*x_length+y_length*y_length)/12}" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </xacro:macro>
+</robot>
